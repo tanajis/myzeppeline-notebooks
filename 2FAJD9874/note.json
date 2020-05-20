@@ -1,0 +1,969 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n\nfrom pyspark.sql.types import StructField, StructType,StringType,DateType,IntegerType\nfrom pyspark.sql.functions import to_date\n\n# https://oracle-base.com/articles/misc/analytic-functions\n\n# Upload Data to hdfs :\n#      hdfs dfs -mkdir /empData\n#      hdfs dfs -copyFromLocal emp.csv /empData/\n\n# Infer Schema kept false so all columns are read as String.\n\n# Define Our own schema\nempschema \u003d StructType([\n    StructField(\u0027empno\u0027,IntegerType(),True),\n    StructField(\u0027ename\u0027,StringType(),True),\n    StructField(\u0027job\u0027,StringType(),True),\n    StructField(\u0027mgr\u0027,IntegerType(),True),\n    StructField(\u0027hiredate\u0027,StringType(),True),\n    StructField(\u0027sal\u0027,IntegerType(),True),\n    StructField(\u0027comm\u0027,StringType(),True),\n    StructField(\u0027deptno\u0027,IntegerType(),True)\n    ])\n#empno,ename,job,mgr,hiredate,sal,comm,deptno\n\nsrcDF \u003d spark.read.csv(\"hdfs://localhost:54310/empData/emp.csv\",header \u003d True,schema \u003dempschema)\n\n#srcDF.show()\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:52:17.704",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1589963555229_1728352029",
+      "id": "20200520-140235_1677856778",
+      "dateCreated": "2020-05-20 14:02:35.229",
+      "dateStarted": "2020-05-20 15:52:17.727",
+      "dateFinished": "2020-05-20 15:52:17.847",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\n# Register as temp Table\n\nsrcDF.registerTempTable(\u0027emp\u0027)",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:52:20.636",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1589964797168_1234227918",
+      "id": "20200520-142317_1476321210",
+      "dateCreated": "2020-05-20 14:23:17.168",
+      "dateStarted": "2020-05-20 15:52:20.682",
+      "dateFinished": "2020-05-20 15:52:20.763",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\nselect * from  emp",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:52:28.449",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "empno",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "ename",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "job",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "mgr",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "hiredate",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {
+                          "priority": 0.0,
+                          "direction": "asc"
+                        },
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "sal",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "comm",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "deptno",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1.0,
+                      "paginationPageSize": 250.0
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "empno": "string",
+                      "ename": "string",
+                      "job": "string",
+                      "mgr": "string",
+                      "hiredate": "date",
+                      "sal": "string",
+                      "comm": "string",
+                      "deptno": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "empno\tename\tjob\tmgr\thiredate\tsal\tcomm\tdeptno\n7369\t\u0027SMITH\u0027\t\u0027CLERK\u0027\t7902\t\u002717-12-1980\u0027\t800\tnull\t20\n7499\t\u0027ALLEN\u0027\t\u0027SALESMAN\u0027\t7698\t\u002720-2-1981\u0027\t1600\t300\t30\n7521\t\u0027WARD\u0027\t\u0027SALESMAN\u0027\t7698\t\u002722-2-1981\u0027\t1250\t500\t30\n7566\t\u0027JONES\u0027\t\u0027MANAGER\u0027\t7839\t\u00272-4-1981\u0027\t2975\tnull\t20\n7654\t\u0027MARTIN\u0027\t\u0027SALESMAN\u0027\t7698\t\u002728-9-1981\u0027\t1250\t1400\t30\n7698\t\u0027BLAKE\u0027\t\u0027MANAGER\u0027\t7839\t\u00271-5-1981\u0027\t2850\tnull\t30\n7782\t\u0027CLARK\u0027\t\u0027MANAGER\u0027\t7839\t\u00279-6-1981\u0027\t2450\tnull\t10\n7788\t\u0027SCOTT\u0027\t\u0027ANALYST\u0027\t7566\t\u002713-07-87\u0027\t3000\tnull\t20\n7839\t\u0027KING\u0027\t\u0027PRESIDENT\u0027\tnull\t\u002717-11-1981\u0027\t5000\tnull\t10\n7844\t\u0027TURNER\u0027\t\u0027SALESMAN\u0027\t7698\t\u002708-09-1981\u0027\t1500\t0\t30\n7876\t\u0027ADAMS\u0027\t\u0027CLERK\u0027\t7788\t\u002713-07-87\u0027\t1100\tnull\t20\n7900\t\u0027JAMES\u0027\t\u0027CLERK\u0027\t7698\t\u00273-12-1981\u0027\t950\tnull\t30\n7902\t\u0027FORD\u0027\t\u0027ANALYST\u0027\t7566\t\u00273-12-1981\u0027\t3000\tnull\t20\n7934\t\u0027MILLER\u0027\t\u0027CLERK\u0027\t7782\t\u002723-1-1982\u0027\t1300\tnull\t10\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589968261516_1435934385",
+      "id": "20200520-152101_863433304",
+      "dateCreated": "2020-05-20 15:21:01.516",
+      "dateStarted": "2020-05-20 15:21:49.864",
+      "dateFinished": "2020-05-20 15:21:50.927",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nSELECT AVG(sal)\nFROM   emp",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:54:07.224",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "avg(sal)": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "avg(sal)\n2073.214285714286\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589968309812_-1215363504",
+      "id": "20200520-152149_1383364671",
+      "dateCreated": "2020-05-20 15:21:49.813",
+      "dateStarted": "2020-05-20 15:54:04.595",
+      "dateFinished": "2020-05-20 15:54:06.341",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\nSELECT deptno, AVG(sal)\nFROM   emp\nGROUP BY deptno\nORDER BY deptno",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:55:49.327",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": true,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "deptno",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "avg(sal)",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1.0,
+                      "paginationPageSize": 250.0
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "updated": false,
+                    "names": {
+                      "deptno": "string",
+                      "avg(sal)": "string"
+                    }
+                  },
+                  "updated": false,
+                  "initialized": false,
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  }
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "deptno",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "avg(sal)",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "deptno\tavg(sal)\n10\t2916.6666666666665\n20\t2175.0\n30\t1566.6666666666667\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970238512_489683674",
+      "id": "20200520-155358_748477210",
+      "dateCreated": "2020-05-20 15:53:58.512",
+      "dateStarted": "2020-05-20 15:55:35.809",
+      "dateFinished": "2020-05-20 15:55:40.122",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\n\nSELECT empno, deptno, sal,\n       AVG(sal) OVER (PARTITION BY deptno) AS avg_dept_sal\nFROM   emp",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:56:37.798",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "empno": "string",
+                      "deptno": "string",
+                      "sal": "string",
+                      "avg_dept_sal": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "empno\tdeptno\tsal\tavg_dept_sal\n7369\t20\t800\t2175.0\n7566\t20\t2975\t2175.0\n7788\t20\t3000\t2175.0\n7876\t20\t1100\t2175.0\n7902\t20\t3000\t2175.0\n7782\t10\t2450\t2916.6666666666665\n7839\t10\t5000\t2916.6666666666665\n7934\t10\t1300\t2916.6666666666665\n7499\t30\t1600\t1566.6666666666667\n7521\t30\t1250\t1566.6666666666667\n7654\t30\t1250\t1566.6666666666667\n7698\t30\t2850\t1566.6666666666667\n7844\t30\t1500\t1566.6666666666667\n7900\t30\t950\t1566.6666666666667\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970265043_1133414632",
+      "id": "20200520-155425_2086909294",
+      "dateCreated": "2020-05-20 15:54:25.044",
+      "dateStarted": "2020-05-20 15:56:26.351",
+      "dateFinished": "2020-05-20 15:56:33.664",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\n\nSELECT empno, deptno, sal,\n       AVG(sal) OVER () AS avg_sal\nFROM   emp\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:57:40.712",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "empno": "string",
+                      "deptno": "string",
+                      "sal": "string",
+                      "avg_sal": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "empno\tdeptno\tsal\tavg_sal\n7369\t20\t800\t2073.214285714286\n7499\t30\t1600\t2073.214285714286\n7521\t30\t1250\t2073.214285714286\n7566\t20\t2975\t2073.214285714286\n7654\t30\t1250\t2073.214285714286\n7698\t30\t2850\t2073.214285714286\n7782\t10\t2450\t2073.214285714286\n7788\t20\t3000\t2073.214285714286\n7839\t10\t5000\t2073.214285714286\n7844\t30\t1500\t2073.214285714286\n7876\t20\t1100\t2073.214285714286\n7900\t30\t950\t2073.214285714286\n7902\t20\t3000\t2073.214285714286\n7934\t10\t1300\t2073.214285714286\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970381704_-1588759017",
+      "id": "20200520-155621_276498183",
+      "dateCreated": "2020-05-20 15:56:21.704",
+      "dateStarted": "2020-05-20 15:57:37.904",
+      "dateFinished": "2020-05-20 15:57:38.535",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\nSELECT empno, deptno, sal,\n       AVG(sal) OVER (PARTITION BY deptno) AS avg_dept_sal\nFROM   emp",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:58:00.922",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "empno": "string",
+                      "deptno": "string",
+                      "sal": "string",
+                      "avg_dept_sal": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "empno\tdeptno\tsal\tavg_dept_sal\n7369\t20\t800\t2175.0\n7566\t20\t2975\t2175.0\n7788\t20\t3000\t2175.0\n7876\t20\t1100\t2175.0\n7902\t20\t3000\t2175.0\n7782\t10\t2450\t2916.6666666666665\n7839\t10\t5000\t2916.6666666666665\n7934\t10\t1300\t2916.6666666666665\n7499\t30\t1600\t1566.6666666666667\n7521\t30\t1250\t1566.6666666666667\n7654\t30\t1250\t1566.6666666666667\n7698\t30\t2850\t1566.6666666666667\n7844\t30\t1500\t1566.6666666666667\n7900\t30\t950\t1566.6666666666667\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970453545_-1253700108",
+      "id": "20200520-155733_4173515",
+      "dateCreated": "2020-05-20 15:57:33.546",
+      "dateStarted": "2020-05-20 15:57:54.441",
+      "dateFinished": "2020-05-20 15:57:59.175",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\nSELECT empno, deptno, sal, \n       FIRST_VALUE(sal IGNORE NULLS) OVER (PARTITION BY deptno) AS first_sal_in_dept\nFROM   emp",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:58:31.174",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nmismatched input \u0027IGNORE\u0027 expecting \u0027)\u0027(line 2, pos 23)\n\n\u003d\u003d SQL \u003d\u003d\nSELECT empno, deptno, sal, \n       FIRST_VALUE(sal IGNORE NULLS) OVER (PARTITION BY deptno) AS first_sal_in_dept\n-----------------------^^^\nFROM   emp\n\nset zeppelin.spark.sql.stacktrace \u003d true to see full stacktrace"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970474296_-2024792419",
+      "id": "20200520-155754_564991997",
+      "dateCreated": "2020-05-20 15:57:54.296",
+      "dateStarted": "2020-05-20 15:58:31.289",
+      "dateFinished": "2020-05-20 15:58:31.325",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\n\nSELECT empno, deptno, sal, \n       FIRST_VALUE(sal IGNORE NULLS) OVER (PARTITION BY deptno ORDER BY sal ASC NULLS LAST) AS first_val_in_dept\nFROM   emp",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:58:49.269",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nmismatched input \u0027IGNORE\u0027 expecting \u0027)\u0027(line 2, pos 23)\n\n\u003d\u003d SQL \u003d\u003d\nSELECT empno, deptno, sal, \n       FIRST_VALUE(sal IGNORE NULLS) OVER (PARTITION BY deptno ORDER BY sal ASC NULLS LAST) AS first_val_in_dept\n-----------------------^^^\nFROM   emp\n\nset zeppelin.spark.sql.stacktrace \u003d true to see full stacktrace"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970493604_956433803",
+      "id": "20200520-155813_1956773776",
+      "dateCreated": "2020-05-20 15:58:13.604",
+      "dateStarted": "2020-05-20 15:58:49.398",
+      "dateFinished": "2020-05-20 15:58:49.441",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nSELECT empno, deptno, sal, \n       AVG(sal) OVER (PARTITION BY deptno ORDER BY sal) AS avg_dept_sal_sofar\nFROM   emp",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:59:14.663",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "empno": "string",
+                      "deptno": "string",
+                      "sal": "string",
+                      "avg_dept_sal_sofar": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "empno\tdeptno\tsal\tavg_dept_sal_sofar\n7369\t20\t800\t800.0\n7876\t20\t1100\t950.0\n7566\t20\t2975\t1625.0\n7788\t20\t3000\t2175.0\n7902\t20\t3000\t2175.0\n7934\t10\t1300\t1300.0\n7782\t10\t2450\t1875.0\n7839\t10\t5000\t2916.6666666666665\n7900\t30\t950\t950.0\n7521\t30\t1250\t1150.0\n7654\t30\t1250\t1150.0\n7844\t30\t1500\t1237.5\n7499\t30\t1600\t1310.0\n7698\t30\t2850\t1566.6666666666667\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970529269_595750613",
+      "id": "20200520-155849_1140421876",
+      "dateCreated": "2020-05-20 15:58:49.275",
+      "dateStarted": "2020-05-20 15:59:07.239",
+      "dateFinished": "2020-05-20 15:59:12.106",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nSELECT empno, deptno, sal, \n       AVG(sal) OVER (PARTITION BY deptno ORDER BY sal\n                      RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS range_avg,\n       AVG(sal) OVER (PARTITION BY deptno ORDER BY sal\n                      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS rows_avg\nFROM   emp",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:59:31.693",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "empno": "string",
+                      "deptno": "string",
+                      "sal": "string",
+                      "range_avg": "string",
+                      "rows_avg": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "empno\tdeptno\tsal\trange_avg\trows_avg\n7369\t20\t800\t800.0\t800.0\n7876\t20\t1100\t950.0\t950.0\n7566\t20\t2975\t1625.0\t1625.0\n7788\t20\t3000\t2175.0\t1968.75\n7902\t20\t3000\t2175.0\t2175.0\n7934\t10\t1300\t1300.0\t1300.0\n7782\t10\t2450\t1875.0\t1875.0\n7839\t10\t5000\t2916.6666666666665\t2916.6666666666665\n7900\t30\t950\t950.0\t950.0\n7521\t30\t1250\t1150.0\t1100.0\n7654\t30\t1250\t1150.0\t1150.0\n7844\t30\t1500\t1237.5\t1237.5\n7499\t30\t1600\t1310.0\t1310.0\n7698\t30\t2850\t1566.6666666666667\t1566.6666666666667\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970547103_-1493810140",
+      "id": "20200520-155907_1317935262",
+      "dateCreated": "2020-05-20 15:59:07.104",
+      "dateStarted": "2020-05-20 15:59:22.425",
+      "dateFinished": "2020-05-20 15:59:28.073",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nSELECT empno, deptno, sal, \n       FIRST_VALUE(sal) OVER (ORDER BY sal ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS previous_sal,\n       LAST_VALUE(sal) OVER (ORDER BY sal ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING) AS next_sal\nFROM   emp;",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:59:34.336",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\nextraneous input \u0027;\u0027 expecting \u003cEOF\u003e(line 4, pos 10)\n\n\u003d\u003d SQL \u003d\u003d\nSELECT empno, deptno, sal, \n       FIRST_VALUE(sal) OVER (ORDER BY sal ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS previous_sal,\n       LAST_VALUE(sal) OVER (ORDER BY sal ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING) AS next_sal\nFROM   emp;\n----------^^^\n\nset zeppelin.spark.sql.stacktrace \u003d true to see full stacktrace"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970562343_-1608751762",
+      "id": "20200520-155922_872571961",
+      "dateCreated": "2020-05-20 15:59:22.343",
+      "dateStarted": "2020-05-20 15:59:34.446",
+      "dateFinished": "2020-05-20 15:59:34.531",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-20 15:59:34.339",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1589970574336_27683125",
+      "id": "20200520-155934_511102756",
+      "dateCreated": "2020-05-20 15:59:34.336",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "spark-analytical-functions-demo",
+  "id": "2FAJD9874",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
