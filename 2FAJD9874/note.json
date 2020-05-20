@@ -3,10 +3,10 @@
     {
       "text": "%pyspark\n\nfrom pyspark.sql.types import StructField, StructType,StringType,DateType,IntegerType\nfrom pyspark.sql.functions import to_date\n\n# https://oracle-base.com/articles/misc/analytic-functions\n\n# Upload Data to hdfs :\n#      hdfs dfs -mkdir /empData\n#      hdfs dfs -copyFromLocal emp.csv /empData/\n\n# Infer Schema kept false so all columns are read as String.\n\n# Define Our own schema\nempschema \u003d StructType([\n    StructField(\u0027empno\u0027,IntegerType(),True),\n    StructField(\u0027ename\u0027,StringType(),True),\n    StructField(\u0027job\u0027,StringType(),True),\n    StructField(\u0027mgr\u0027,IntegerType(),True),\n    StructField(\u0027hiredate\u0027,StringType(),True),\n    StructField(\u0027sal\u0027,IntegerType(),True),\n    StructField(\u0027comm\u0027,StringType(),True),\n    StructField(\u0027deptno\u0027,IntegerType(),True)\n    ])\n#empno,ename,job,mgr,hiredate,sal,comm,deptno\n\nsrcDF \u003d spark.read.csv(\"hdfs://localhost:54310/empData/emp.csv\",header \u003d True,schema \u003dempschema)\n\n#srcDF.show()\n\n",
       "user": "anonymous",
-      "dateUpdated": "2020-05-20 15:52:17.704",
+      "dateUpdated": "2020-05-20 16:19:38.260",
       "config": {
         "colWidth": 12.0,
-        "fontSize": 9.0,
+        "fontSize": 14.0,
         "enabled": true,
         "results": {},
         "editorSetting": {
